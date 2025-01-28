@@ -16,6 +16,8 @@ import sql from "./sql.png";
 import redux from "./redux.png";
 import next from  "./next.png"
 import node from "./node.png"
+import checkmark from "./checkmark.png"
+import arrow from "./arrow.png"
 import right_arrow_white from './right-arrow-white.png';
 import logo from './logo.png';
 import logo_dark from './logo_dark.png';
@@ -50,6 +52,8 @@ export const assets = {
     edu_icon_dark,
     project_icon,
     project_icon_dark,
+    checkmark,
+    arrow,
     vscode,
     firebase,
     figma,

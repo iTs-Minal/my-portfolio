@@ -68,6 +68,11 @@ useEffect(()=>{
             </a>
           </li>
           <li>
+            <a className="font-Ovo" href="#experiences">
+              Experiences
+            </a>
+          </li>
+          <li>
             <a className="font-Ovo" href="#work">
               My Work
             </a>
