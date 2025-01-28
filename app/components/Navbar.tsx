@@ -1,9 +1,11 @@
 "use client"
 import Image from "next/image";
 import { assets } from "@/assets/assets";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Navbar = () => {
+
+  const [isScroll,setIsScroll]=useState(false);
 
 const sideMenuRef = useRef<HTMLUListElement|null>(null);
 
@@ -21,13 +23,25 @@ const closeMenu =()=>{
     }
 }
 
+
+useEffect(()=>{
+  window.addEventListener("scroll",()=>{
+    if(scrollY > 50){
+      setIsScroll(true)
+    }
+    else{
+      setIsScroll(false)
+    }
+  })
+},[])
+
   return (
     <>
       <div className="fixed top-0 right-0 w-11/12 -z-10 translate-y-[-80%]">
         <Image src={assets.header_bg_color} alt="" className="w-full" />
       </div>
 
-      <nav className="w-full  fixed px-4 lg:px-8 xl:px-[8%] py-2 flex items-center justify-between z-50">
+      <nav className={`w-full fixed px-4 lg:px-8 xl:px-[8%] py-2 flex items-center justify-between z-50 ${isScroll ? "bg-white bg-opacity-50 backdrop-blur-lg shadow-sm" : ""}`}>
         <a href="#top" title="To the top">
           <Image
             src={assets.logo}
@@ -37,7 +51,7 @@ const closeMenu =()=>{
           />
         </a>
 
-        <ul className="hidden md:flex ml-14 items-center gap-6 lg:gap-8 rounded-full px-12 py-3 bg-white shadow-sm bg-opacity-50">
+        <ul className={`hidden md:flex ml-14 items-center gap-6 lg:gap-8 rounded-full px-12 py-3 ${isScroll? "" : "bg-white shadow-sm bg-opacity-50"} `}>
           <li>
             <a className="font-Ovo" href="#top">
               Home
@@ -74,7 +88,7 @@ const closeMenu =()=>{
             href="#contact"
             className="hidden lg:flex items-center gap-3 px-10 py-2.5 border border-gray-500 rounded-full ml-4 font-Ovo"
           >
-            Contact <Image src={assets.arrow_icon} className="w-3" alt="" />{" "}
+            Contact <Image src={assets.arrow_icon} className="w-3 " alt="" />{" "}
           </a>
 
           <button onClick={openMenu} className="block md:hidden ml-3">

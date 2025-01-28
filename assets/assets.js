@@ -125,5 +125,7 @@ export const infoList = [
 ];
 
 export const toolsData = [
- assets.react, assets.next, assets.node, assets.express, assets.sql, assets.redux, assets.firebase, assets.mongodb, assets.figma, 
+  assets.firebase, assets.mongodb, assets.figma, assets.vscode,assets.git
 ];
+
+export const knowledge=[assets.react, assets.next, assets.node, assets.express, assets.sql, assets.redux,assets.firebase, assets.mongodb, assets.figma,]
