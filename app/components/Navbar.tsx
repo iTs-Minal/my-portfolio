@@ -5,7 +5,7 @@ import { useRef } from "react";
 
 const Navbar = () => {
 
-const sideMenuRef = useRef<HTMLDivElement|null>(null);
+const sideMenuRef = useRef<HTMLUListElement|null>(null);
 
 const openMenu =()=>{
     if(sideMenuRef.current){
@@ -27,16 +27,17 @@ const closeMenu =()=>{
         <Image src={assets.header_bg_color} alt="" className="w-full" />
       </div>
 
-      <nav className="w-full fixed px-5 lg:px-8 xl:px-[8%] py-4 flex items-center justify-between z-50">
+      <nav className="w-full  fixed px-4 lg:px-8 xl:px-[8%] py-2 flex items-center justify-between z-50">
         <a href="#top" title="To the top">
           <Image
             src={assets.logo}
             alt="logo"
-            className="w-20 h-20 cursor-pointer mr-14"
+            width={50} height={50}
+            className="cursor-pointer mr-14"
           />
         </a>
 
-        <ul className="hidden md:flex items-center gap-6 lg:gap-8 rounded-full px-12 py-3 bg-white shadow-sm bg-opacity-50">
+        <ul className="hidden md:flex ml-14 items-center gap-6 lg:gap-8 rounded-full px-12 py-3 bg-white shadow-sm bg-opacity-50">
           <li>
             <a className="font-Ovo" href="#top">
               Home
