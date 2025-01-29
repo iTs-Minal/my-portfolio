@@ -1,5 +1,6 @@
 "use client"
 import About from "./components/About";
+import Contact from "./components/Contact";
 import Experiences from "./components/Experiences";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
@@ -16,6 +17,7 @@ export default function Home() {
     <Services/>
     <Experiences/>
     <Work/>
+    <Contact/>
     </>
   );
 }
