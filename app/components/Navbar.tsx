@@ -1,62 +1,72 @@
-"use client"
+"use client";
 import Image from "next/image";
 import { assets } from "@/assets/assets";
 import { useContext, useEffect, useRef, useState } from "react";
 import { DarkModeContext } from "../themeToggle";
 
 const Navbar = () => {
+  const darkModeContext = useContext(DarkModeContext);
+  if (!darkModeContext) {
+    throw new Error("DarkModeContext is undefined");
+  }
+  const { isDarkMode, setIsDarkMode } = darkModeContext;
 
+  const [isScroll, setIsScroll] = useState(false);
 
-const {isDarkMode,setIsDarkMode}=useContext(DarkModeContext);
+  const sideMenuRef = useRef<HTMLUListElement | null>(null);
 
-
-  const [isScroll,setIsScroll]=useState(false);
-
-const sideMenuRef = useRef<HTMLUListElement|null>(null);
-
-const openMenu =()=>{
-    if(sideMenuRef.current){
-
-        sideMenuRef.current.style.transform="translateX(-16rem)"
+  const openMenu = () => {
+    if (sideMenuRef.current) {
+      sideMenuRef.current.style.transform = "translateX(-16rem)";
     }
-}
+  };
 
-const closeMenu =()=>{
-    if(sideMenuRef.current){
-
-        sideMenuRef.current.style.transform="translateX(16rem)"
+  const closeMenu = () => {
+    if (sideMenuRef.current) {
+      sideMenuRef.current.style.transform = "translateX(16rem)";
     }
-}
+  };
 
-
-useEffect(()=>{
-  window.addEventListener("scroll",()=>{
-    if(scrollY > 50){
-      setIsScroll(true)
-    }
-    else{
-      setIsScroll(false)
-    }
-  })
-},[])
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (scrollY > 50) {
+        setIsScroll(true);
+      } else {
+        setIsScroll(false);
+      }
+    });
+  }, []);
 
   return (
     <>
-      <div className="fixed top-0 right-0 w-11/12 -z-10 translate-y-[-80%]">
+      <div className="fixed top-0 right-0 w-11/12 -z-10 translate-y-[-80%] dark:hidden">
         <Image src={assets.header_bg_color} alt="" className="w-full" />
       </div>
 
-      <nav className={`w-full fixed px-4 lg:px-8 xl:px-[8%] py-2 flex items-center justify-between z-50 ${isScroll ? "bg-white bg-opacity-50 backdrop-blur-lg shadow-sm" : ""}`}>
+      <nav
+        className={`w-full fixed px-4 lg:px-8 xl:px-[8%] py-2 flex items-center justify-between z-50 ${
+          isScroll
+            ? "bg-white bg-opacity-50 backdrop-blur-lg shadow-sm dark:bg-darkTheme dark:shadow-white/20"
+            : ""
+        }`}
+      >
         <a href="#top" title="To the top">
           <Image
-            src={assets.logo}
+            src={isDarkMode ? assets.logo_dark : assets.logo}
             alt="logo"
-            width={50} height={50}
+            width={50}
+            height={50}
             className="cursor-pointer mr-14"
           />
         </a>
 
-        <ul className={`hidden md:flex ml-14 items-center gap-6 lg:gap-8 rounded-full px-12 py-3 ${isScroll? "" : "bg-white shadow-sm bg-opacity-50"} `}>
+        <ul
+          className={`hidden md:flex ml-14 items-center gap-6 lg:gap-8 rounded-full px-12 py-3 ${
+            isScroll
+              ? ""
+              : "bg-white shadow-sm bg-opacity-50 dark:border dark:border-white/50 dark:bg-transparent"
+          } `}
+        >
           <li>
             <a className="font-Ovo" href="#top">
               Home
@@ -90,29 +100,48 @@ useEffect(()=>{
         </ul>
 
         <div className="flex items-center gap-4">
-          <button onClick={()=>setIsDarkMode((prev: boolean) => !prev)}>
-            <Image src={isDarkMode?(assets.sun_icon):(assets.moon_icon)} alt="Toggle theme" className="w-6" />
+          <button onClick={() => setIsDarkMode((prev: boolean) => !prev)}>
+            <Image
+              src={isDarkMode ? assets.sun_icon : assets.moon_icon}
+              alt="Toggle theme"
+              className="w-6"
+            />
           </button>
 
           <a
             href="#contact"
-            className="hidden lg:flex items-center gap-3 px-10 py-2.5 border border-gray-500 rounded-full ml-4 font-Ovo"
+            className="hidden lg:flex items-center gap-3 px-10 py-2.5 border border-gray-500 rounded-full ml-4 font-Ovo dark:border-white/50 "
           >
-            Contact <Image src={assets.arrow_icon} className="w-3 " alt="" />{" "}
+            Contact
+            <Image
+              src={isDarkMode ? assets.arrow_icon_dark : assets.arrow_icon}
+              className="w-3 "
+              alt=""
+            />{" "}
           </a>
 
           <button onClick={openMenu} className="block md:hidden ml-3">
-            <Image src={assets.menu_black} alt="" className="w-6" />
+            <Image
+              src={isDarkMode ? assets.menu_white : assets.menu_black}
+              alt=""
+              className="w-6"
+            />
           </button>
         </div>
 
         {/* --------------------- mobile-menu --------------*/}
 
-        <ul ref={sideMenuRef} className="flex md:hidden flex-col gap-4 py-20 px-10 fixed -right-64 top-0 bottom-0 w-64 z-50 h-screen bg-gray-100 transition duration-500 ">
-
-<div onClick={closeMenu} className="absolute right-6 top-6">
-    <Image src={assets.close_black} alt=" " className="w-5 cursor-pointer" />
-</div>
+        <ul
+          ref={sideMenuRef}
+          className="flex md:hidden flex-col gap-4 py-20 px-10 fixed -right-64 top-0 bottom-0 w-64 z-50 h-screen bg-gray-100 transition duration-500 dark:bg-darkHover dark:text-white"
+        >
+          <div onClick={closeMenu} className="absolute right-6 top-6">
+            <Image
+              src={isDarkMode ? assets.close_white : assets.close_black}
+              alt=" "
+              className="w-5 cursor-pointer"
+            />
+          </div>
 
           <li>
             <a onClick={closeMenu} className="font-Ovo" href="#top">
@@ -131,7 +160,7 @@ useEffect(()=>{
           </li>
           <li>
             <a onClick={closeMenu} className="font-Ovo" href="#experiences">
-            Experiences
+              Experiences
             </a>
           </li>
           <li>

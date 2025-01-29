@@ -4,12 +4,12 @@ import "./globals.css";
 
 const Outfit = OutfitFont({
   subsets: ["latin"],
-  weight:["400","500","600","700"]
+  weight: ["400", "500", "600", "700"],
 });
 
 const Ovo = OvoFont({
   subsets: ["latin"],
-  weight:["400"]
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
