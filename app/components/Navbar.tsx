@@ -1,9 +1,14 @@
 "use client"
 import Image from "next/image";
 import { assets } from "@/assets/assets";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { DarkModeContext } from "../themeToggle";
 
 const Navbar = () => {
+
+
+const {isDarkMode,setIsDarkMode}=useContext(DarkModeContext);
+
 
   const [isScroll,setIsScroll]=useState(false);
 
@@ -85,8 +90,8 @@ useEffect(()=>{
         </ul>
 
         <div className="flex items-center gap-4">
-          <button title="Toggle theme">
-            <Image src={assets.moon_icon} alt="Toggle theme" className="w-6" />
+          <button onClick={()=>setIsDarkMode((prev: boolean) => !prev)}>
+            <Image src={isDarkMode?(assets.sun_icon):(assets.moon_icon)} alt="Toggle theme" className="w-6" />
           </button>
 
           <a
@@ -103,7 +108,7 @@ useEffect(()=>{
 
         {/* --------------------- mobile-menu --------------*/}
 
-        <ul ref={sideMenuRef} className="flex md:hidden flex-col gap-4 py-20 px-10 fixed -right-64 top-0 bottom-0 w-64 z-50 h-screen bg-rose-50 transition duration-500 ">
+        <ul ref={sideMenuRef} className="flex md:hidden flex-col gap-4 py-20 px-10 fixed -right-64 top-0 bottom-0 w-64 z-50 h-screen bg-gray-100 transition duration-500 ">
 
 <div onClick={closeMenu} className="absolute right-6 top-6">
     <Image src={assets.close_black} alt=" " className="w-5 cursor-pointer" />
@@ -122,6 +127,11 @@ useEffect(()=>{
           <li>
             <a onClick={closeMenu} className="font-Ovo" href="#services">
               Services
+            </a>
+          </li>
+          <li>
+            <a onClick={closeMenu} className="font-Ovo" href="#experiences">
+            Experiences
             </a>
           </li>
           <li>
